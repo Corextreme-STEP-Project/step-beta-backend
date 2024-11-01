@@ -2,7 +2,7 @@ import { Schema } from "mongoose";
 import { toJSON } from "@reis/mongoose-to-json";
 
 export const userSchema = new Schema({
-
+    
 }, {
     timestamps: true
 });

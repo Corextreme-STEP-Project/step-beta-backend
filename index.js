@@ -5,6 +5,8 @@ await mongoose.connect(process.env.MONGO_URI);
 
 const app = express();
 
-app.listen(5000, () => {
-    console.log('App is listening on port 5000')
+const port = process.env.PORT
+
+app.listen(port, () => {
+    console.log('App is listening')
 });
