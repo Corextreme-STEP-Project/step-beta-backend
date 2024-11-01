@@ -5,7 +5,7 @@ export const projectSchema = new Schema({
     name: { type: String, required: true },
     scope: { type: String, required: true },
     budget: { type: Number, required: true },
-    KeyRequirements: { type: [String], required: true },
+    keyRequirements: { type: [String], required: true },
     status: {
         type: String,
         default: 'Maturation',
