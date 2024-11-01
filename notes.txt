@@ -1,0 +1,16 @@
+user: 
+name, 
+email, 
+institution/organisation, 
+role(? not sure whether to use role in the organisation or the roles in the project documentation), government id,
+phone number, 
+password, 
+projects
+
+project: 
+title, 
+duration(start and end date), 
+contractor, 
+project overseer
+
+compliance: 
