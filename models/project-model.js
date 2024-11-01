@@ -2,6 +2,7 @@ import { Schema } from "mongoose";
 import { toJSON } from "@reis/mongoose-to-json";
 
 export const projectSchema = new Schema({
+    user: {type: Types.ObjectId, required: true, ref: 'user'},
     name: { type: String, required: true },
     scope: { type: String, required: true },
     budget: { type: Number, required: true },
@@ -14,7 +15,8 @@ export const projectSchema = new Schema({
             'Procurement',
             'Execution',
             'Monitoring'
-        ]
+        ],
+    
     },
     createdAt: { type: Date, default: Date.now },
     completedAt: { type: Date },
@@ -24,4 +26,4 @@ export const projectSchema = new Schema({
 
 projectSchema.plugin(toJSON);
 
-export const userModel = model('user', projectSchema);
+export const ProjectModel = model('Project', projectSchema);
