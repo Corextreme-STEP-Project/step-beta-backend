@@ -12,7 +12,7 @@ export const projectSchema = new Schema({
     projectBegins: { type: Date, default: Date.now },
     projectEnds: { type: Date },
     duration: { type: String },
-    projectCompliance: { type: Boolean }
+    compliance: { type: Types.ObjectId, ref: 'compliance' }
 }, {
     timestamps: true
 });
