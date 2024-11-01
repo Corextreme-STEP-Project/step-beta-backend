@@ -8,11 +8,13 @@ export const projectSchema = new Schema({
     scope: { type: String, required: true },
     budget: { type: Number, required: true },
     keyRequirements: { type: [String], required: true },
-    projectStatus: { type: String, default: 'Maturation', enum: ['Maturation', 'Procurement', 'Execution', 'Monitoring'] },
     projectBegins: { type: Date, default: Date.now },
     projectEnds: { type: Date },
-    duration: { type: String },
-    projectCompliance: { type: Boolean }
+    projectDuration: { type: String },
+    projectStatus: { type: String, default: 'Maturation', enum: ['Maturation', 'Procurement', 'Execution', 'Monitoring', 'Completed', 'On-hold', 'Cancelled'] },
+    statusDescription: { type: String },
+    statusChangeAt: { type: Date, default: Date.now },
+    compliance: { type: Types.ObjectId, ref: 'compliance' }
 }, {
     timestamps: true
 });

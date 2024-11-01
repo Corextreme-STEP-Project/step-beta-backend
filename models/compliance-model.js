@@ -1,9 +1,11 @@
-import { Schema } from "mongoose";
+import { Schema, model, Types } from "mongoose";
 import { toJSON } from "@reis/mongoose-to-json";
 
 export const complianceSchema = new Schema({
-project
-user
+projectId: {type: Types.ObjectId, required: true, ref: 'project'},
+complianceStatus: {type: Boolean, required: true},
+complianceReport: {type: String},
+correctiveActions: {type: String}
 }, {
     timestamps: true
 });
