@@ -5,10 +5,10 @@ export const userSchema = new Schema({
     name: { type: String, required: true },
     email: { type: String, required: true },
     phoneNumber: { type: String },
-    role: { enum: ['Project Owner', 'Project Regulator'] },
+    role: { type: String, enum: ['Project Owner', 'Project Regulator'] },
     governmentId: { type: String },
-    projects: {type: Types.ObjectId, ref: 'project'},  //should this field be required?? 
-    compliance: {type: Types.ObjectId, ref: 'compliance'}
+    projects: [{type: Types.ObjectId, ref: 'project'}],  
+    compliance: [{type: Types.ObjectId, ref: 'compliance'}]
 }, {
     timestamps: true
 });
