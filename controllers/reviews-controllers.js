@@ -7,7 +7,7 @@ export const addReview = async (req, res, next) => {
         if (error) {
             return res.status(422).json(error)
         }
-        const review = await ReviewModel.create({ ...value, user: req.auth.id })
+        const review = await ReviewModel.create(value)
         res.status(201).json(review)
     } catch (error) {
         next(error)
