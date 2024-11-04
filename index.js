@@ -20,5 +20,5 @@ app.use(projectRouter);
 app.use(userRouter)
 
 app.listen(port, () => {
-  console.log("App is listening");
+    console.log(`App is listening on ${port}`)
 });
