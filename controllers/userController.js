@@ -2,6 +2,18 @@
 
 import { userModel } from "../models/user-models.js"
 
+export const registerUser = async (req, res) => {
+    const { name, email, password } = req.body;
+    const user = await userModel.create({ name, email, password });
+    res.json({ user, message: "User registered successfully" });
+};  
+
+// Controller for user login
+export const loginUser = async (req, res) => {
+    const { email, password } = req.body;
+    console.log(email, password);
+    res.json({ message: "User logged in successfully" });
+};
 
 // Partial Update user
 export const updateUser = async (req, res, next) => {
