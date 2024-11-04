@@ -9,4 +9,5 @@ export const projectSchema = new Schema({
 
 projectSchema.plugin(toJSON);
 
+// export the model
 export const userModel = model('user', projectSchema);
