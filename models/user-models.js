@@ -6,6 +6,8 @@ export const userSchema = new Schema({
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
     phoneNumber: { type: String },
+    deleted: { type: Boolean, default: false },
+    deletedAt: { type: Date },
     role: { type: String, enum: ['Project Owner', 'Project Regulator'] },
     governmentId: { type: String },
     projects: [{type: Types.ObjectId, ref: 'project'}],  
