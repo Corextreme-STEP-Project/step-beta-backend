@@ -8,3 +8,4 @@ export const isAuthenticated = expressjwt({
     algorithms: ["HS256"],
     requestProperty: 'auth' // Attaches the decoded token to req.auth
 });
+
