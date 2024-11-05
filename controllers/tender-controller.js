@@ -1,8 +1,20 @@
 import { TenderModel } from "../models/tender-model.js";
+import {createTenderValidator, updateTenderValidator } from "../validators/tender-validator.js";
 
 // create a new tender
-export const createTender = async (req, res, next) => {
+export const createTender = async (req, res, next) =>{
     try {
+        // check if user is authenticated
+        if (!req.user) {
+            return res.status(401).json({ message: "Unauthorized"});
+        }
+
+        // validate input
+        const { error, value } = createTenderValidator.validate(req.body);
+        if (error) {
+            return res.status(400).json({ message: error.details[0].message });
+        }
+
         const tender = await TenderModel.create(req.body);
         res.status(201).json(tender);
     } catch (error) {
@@ -36,6 +48,11 @@ export const getTenderById = async (req, res, next) => {
 // update a tender by id
 export const updateTenderById = async (req, res, next) => {
     try {
+
+        const { error, value } = updateTenderValidator.validate(req.body);
+        if (error) {
+            return res.status(400).json({ message: error.details[0].message });
+        }
         const tender = await TenderModel.findByIdAndUpdate(req.params.id, req.body, { new: true });
         if (!tender) {
             return res.status(404).json({ message: "Tender not found" });
@@ -55,4 +72,5 @@ export const deleteTenderById = async (req, res, next) => {
         next(error);
     }
 };
+
 
