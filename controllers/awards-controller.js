@@ -7,7 +7,7 @@ export const addAward = async (req, res, next) => {
         if (error) {
             return res.status(422).json(error)
         }
-        const award = await awardModel.create({ ...value, user: req.auth.id })
+        const award = await awardModel.create(value)
         res.status(201).json(award)
     } catch (error) {
         next(error)
@@ -34,7 +34,7 @@ export const updateAwards = async (req,res,next) => {
             if (error) {
                 return res.status(422).json(error)
             }
-            const award = await awardModel.findByIdAndUpdate({ user: req.auth.id }, value, { new: true })
+            const award = await awardModel.findByIdAndUpdate(req.params.id, value, { new: true })
             res.json(award)
     } catch (error) {
         next(error)
@@ -43,7 +43,7 @@ export const updateAwards = async (req,res,next) => {
 
     export const deleteAward = async (req,res,next) => {
         try {
-            await awardModel.findByIdAndDelete({ user: req.auth.id})
+            await awardModel.findByIdAndDelete(req.params.id)
             res.status(200).json('Award deleted successfully')
         } catch (error) {
             next(error)

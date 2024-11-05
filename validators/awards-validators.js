@@ -1,8 +1,8 @@
-import Joi, { number } from "joi";
+import Joi from "joi"
 
 export const addAwardValidate = Joi.object({
-    award_amount: Joi().required().number()
+    award_amount: Joi.number().required()
 })
 export const updateAwardValidate = Joi.object({
-    award_amount: Joi().number()
+    award_amount: Joi.number()
 })
