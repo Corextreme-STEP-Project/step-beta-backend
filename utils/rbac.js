@@ -4,9 +4,8 @@ export const permissions = [
         actions: [
             'get_project',
             'get_project_id',
-            'count_project'
-
-
+            'count_project',
+            'get_user_profile'
         ]
     },
     {
@@ -18,24 +17,25 @@ export const permissions = [
             'update_project',
             'delete_project',
             'count_project'
-
-
-        role:'project owner',
-        actions:[
-            'create project',
-            'update project',
-            'delete project',
-            'get project'
         ]
     },
     {
-        role:'project regulator',
+        role:'project_owner',
         actions:[
-            'create project',
-            'update project',
-            'delete project',
-            'get project',
-            'update project status',
+            'create_project',
+            'update_project',
+            'delete_project',
+            'get_project'
+        ]
+    },
+    {
+        role:'project_regulator',
+        actions:[
+            'create_project',
+            'update_project',
+            'delete_project',
+            'get_project',
+            'update_project_status',
         ]
     }
 ]
