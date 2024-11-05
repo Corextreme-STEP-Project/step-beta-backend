@@ -6,7 +6,9 @@ export const userSchema = new Schema({
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
     phoneNumber: { type: String },
-    role: { type: String, enum: ['Project Owner', 'Project Regulator'] },
+    deleted: { type: Boolean, default: false },
+    deletedAt: { type: Date },
+    role: { type: String, enum: ['Project Owner', 'Project Regulator', "user"], default: "user" },
     governmentId: { type: String },
     projects: [{type: Types.ObjectId, ref: 'project'}],  
     compliance: [{type: Types.ObjectId, ref: 'compliance'}]
@@ -16,4 +18,4 @@ export const userSchema = new Schema({
 
 userSchema.plugin(toJSON);
 
-export const userModel = model('user', userSchema);
+export const UserModel = model('user', userSchema);
