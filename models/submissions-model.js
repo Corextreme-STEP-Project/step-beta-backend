@@ -38,6 +38,9 @@ const submissionSchema = new Schema({
     timestamps: true
 });
 
+// add index for common queries
+submissionSchema.index({ tenderId: 1, status: 1, submissionDate: 1});
+
 // use the toJSON plugin to convert the mongoose document to a JSON object
 submissionSchema.plugin(toJSON);
 

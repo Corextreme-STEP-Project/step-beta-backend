@@ -5,7 +5,9 @@ export const permissions = [
             'get_project',
             'get_project_id',
             'count_project',
-            'get_user_profile'
+            'get_user_profile',
+            'create_submission',
+            'update_submission',
         ]
     },
     {
@@ -16,7 +18,8 @@ export const permissions = [
             'post_project',
             'update_project',
             'delete_project',
-            'count_project'
+            'count_project',
+            'delete_submission'
         ]
     },
     {
@@ -36,6 +39,7 @@ export const permissions = [
             'delete_project',
             'get_project',
             'update_project_status',
+            'delete_tender'
         ]
     }
 ]
