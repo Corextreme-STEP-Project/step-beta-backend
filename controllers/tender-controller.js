@@ -10,13 +10,21 @@ export const createTender = async (req, res, next) => {
         // }
 
         // validate input
-        const { error, value } = createTenderValidator.validate(req.body);
+        const { error, value } = createTenderValidator.validate({ 
+            ...req.body, 
+            attachments: req.files?.filename, });
         if (error) {
-            return res.status(400).json({ message: error.details[0].message });
-        }
+            return res.status(422).json({ message: error.details[0].message });
+        };
 
-        const tender = await TenderModel.create(req.body);
-        res.status(201).json(tender);
+        // create tender
+        await TenderModel.create({
+            ...value,
+            createdBy: req.auth._id
+        });
+
+        // send success response
+        res.status(201).json({ message: "Tender created successfully" });   
     } catch (error) {
         next(error);
     }
@@ -56,7 +64,7 @@ export const updateTenderById = async (req, res, next) => {
         const tender = await TenderModel.findOneAndUpdate(
             {
                 _id: req.params.id,
-                user: req.auth.id
+                createdBy: req.auth._id
             },
             
             value,
@@ -78,7 +86,7 @@ export const deleteTenderById = async (req, res, next) => {
         if (!tender) {
             return res.status(404).json({ message: "Tender not found" });
         }
-        if (tender.user.toString() !== req.auth.id) {
+        if (tender.createdBy.toString() !== req.auth.id) {
             return res.status(403).json({ message: "You do not have permission to delete this tender" });
         }
         await TenderModel.findOneAndDelete(req.params.id);
