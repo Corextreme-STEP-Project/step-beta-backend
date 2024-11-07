@@ -1,11 +1,14 @@
 import Joi from "joi";
 
 export const registerUserValidator = Joi.object({
-    name: Joi.string().required().min(3).max(30),
+    // name: Joi.string().required().min(3).max(30),
+    firstName: Joi.string().required().min(3).max(30),
+    middleName: Joi.string().min(3).max(30),
+    lastName: Joi.string().required().min(3).max(30),
     email: Joi.string().required().email(),
     password: Joi.string().required(),
     phoneNumber: Joi.string().required(),
-    role: Joi.string().valid('project_owner', 'project_regulator', 'vendor', 'user')
+    role: Joi.string().valid('Project Owner', 'Project Regulator', 'vendor', 'user')
 });
 
 export const loginUserValidator = Joi.object({
@@ -15,7 +18,9 @@ export const loginUserValidator = Joi.object({
 
 
 export const updateUserValidator = Joi.object({
-    name: Joi.string(),
+    firstName: Joi.string(),
+    middleName: Joi.string(),
+    lastName: Joi.string(),
     email: Joi.string().email(),
     phoneNumber: Joi.string()
 });
