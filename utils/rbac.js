@@ -8,6 +8,8 @@ export const permissions = [
             'get_user_profile',
             'create_submission',
             'update_submission',
+            'update_profile',
+            'delete_profile',
         ]
     },
     {
