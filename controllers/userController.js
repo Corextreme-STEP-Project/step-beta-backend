@@ -4,7 +4,7 @@ import { UserModel } from "../models/user-models.js"
 import bcrypt from "bcryptjs"
 import jwt from "jsonwebtoken"
 
-export const registerUser = async (req, res) => {
+export const registerUser = async (req, res, next) => {
 
     try {
         // Validate user input

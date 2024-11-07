@@ -2,7 +2,11 @@ import { SubmissionModel } from "../models/submissions-model.js";
 
 export const createSubmission = async (req, res, next) => {
     try {
-        const submission = await SubmissionModel.create(req.body);
+        const { error, value } = createSubmissionValidator.validate(req.body);
+        if (error) {
+            return res.status(400).json({ message: error.details[0].message})
+        }
+        const submission = await SubmissionModel.create(value);
         res.status(201).json(submission);
     } catch (error) {
         next(error);
@@ -20,6 +24,10 @@ export const getSubmission = async (req, res, next) => {
 
 export const updateSubmission = async (req, res, next) => {
     try {
+        const { error, value } = updateSubmissionValidator.validate(req.body);
+        if (error) {
+            return res.status(422).json({ message: error.details[0].message });
+        }
         const submission = await SubmissionModel.findByIdAndUpdate(req.params.id, req.body, { new: true });
         res.status(200).json(submission);
     } catch (error) {
