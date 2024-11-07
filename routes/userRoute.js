@@ -11,8 +11,8 @@ userRouter.post('/users/login', loginUser);
 
 userRouter.get('/users/me', isAuthenticated, hasPermission('get_user_profile'), getUserProfile);
 
-userRouter.patch('/users/:id', updateUser);
+userRouter.patch('/users/:id', isAuthenticated, hasPermission('update_user'), updateUser);
 
-userRouter.delete('/users/:id', deletedUser);
+userRouter.delete('/users/:id', isAuthenticated, hasPermission('delete_user'), deletedUser);
 
 export default userRouter

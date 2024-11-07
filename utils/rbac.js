@@ -28,7 +28,9 @@ export const permissions = [
             'create_project',
             'update_project',
             'delete_project',
-            'get_project'
+            'get_project',
+            'update_profile',
+            'delete_profile',
         ]
     },
     {
@@ -41,6 +43,8 @@ export const permissions = [
             'update_project_status',
             'delete_tender',
             'create_tender',
+            'update_profile',
+            'delete_profile',
             'update_tender'
         ]
     }

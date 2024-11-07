@@ -88,6 +88,8 @@ export const updateUser = async (req, res, next) => {
     }
 }
 
+
+
 // Full Update user
 // export const fullUserUpdate = async (req, res, next) => {
 //     try {
