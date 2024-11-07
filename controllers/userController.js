@@ -78,7 +78,7 @@ export const updateUser = async (req, res, next) => {
             return req.status(422).json(error)
         }
         const { id } = req.params
-        const user = await UserModel.findByIdAndUpdate(id, req.body, { new: true })
+        const user = await UserModel.findByIdAndUpdate(req.auth.id,value, { new: true })
         if (!user) {
             return res.status(404).json({ message: "User not found" })
         }
@@ -87,6 +87,8 @@ export const updateUser = async (req, res, next) => {
         next(error)
     }
 }
+
+
 
 // Full Update user
 // export const fullUserUpdate = async (req, res, next) => {
@@ -107,7 +109,7 @@ export const updateUser = async (req, res, next) => {
 export const deletedUser = (req, res, next) => {
     try {
         const { id } = req.params
-        const user = UserModel.findByIdAndUpdate(id, { deleted: true, deletedAt: new Date() }, { new: true });
+        const user = UserModel.findByIdAndUpdate(req.auth.id, { deleted: true, deletedAt: new Date() }, { new: true });
         if (!user) {
             return res.status(404).json({ message: "user not found" })
         }
