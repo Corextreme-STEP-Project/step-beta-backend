@@ -44,23 +44,26 @@ const tenderSchema = new Schema({
         required: true,
         trim: true
     },
-    attachments: [{
-        name: {
-            type: String,
-            required: true,
-        },
-        url: String,
-        mimeType: {
-            type: String,
-            required: true,
-            enum: [
-                'application/pdf',
-                'application/msword',
-                'image/jpeg',
-                'image/png'
-        ]
-        }
-    }],
+    attachments: {
+        type: [String],
+        required: true
+    },
+        // name: {
+    //         type: String,
+            // required: true,
+    //     },
+    //     url: String,
+    //     mimeType: {
+    //         type: String,
+    //         required: true,
+    //         enum: [
+    //             'application/pdf',
+    //             'application/msword',
+    //             'image/jpeg',
+    //             'image/png'
+    //     ]
+    //     }
+    // }],
     isDeleted: {
         type: Boolean,
         default: false

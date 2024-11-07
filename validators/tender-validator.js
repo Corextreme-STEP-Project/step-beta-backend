@@ -16,18 +16,19 @@ export const createTenderValidator = Joi.object({
     department: Joi.string().required(),
     status: Joi.string(),
     createdBy: Joi.custom(isValidObjectId).required(), 
-    attachments: Joi.array().items(
-        Joi.object({
-          name: Joi.string().required(),
-          url: Joi.string().uri().required(), 
-          mimeType: Joi.string().required().valid(
-            'application/pdf',
-            'application/msword',
-            'image/jpeg',
-            'image/png'
-          ),
-        })
-      ),
+    attachments: Joi.string().required()
+    // attachments: Joi.array().items(
+    //     Joi.object({
+    //       name: Joi.string().required(),
+    //       url: Joi.string().uri().required(), 
+    //       mimeType: Joi.string().required().valid(
+    //         'application/pdf',
+    //         'application/msword',
+    //         'image/jpeg',
+    //         'image/png'
+    //       ),
+    //     })
+    //   ),
     });
 
 export const updateTenderValidator = Joi.object({

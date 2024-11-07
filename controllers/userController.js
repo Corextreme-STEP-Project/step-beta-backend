@@ -46,7 +46,7 @@ export const loginUser = async (req, res, next) => {
             return res.status(401).json({ message: "Invalid email or password" })
         }
         // Generate JWT token
-        const token = jwt.sign({ id: user.id }, process.env.JWT_PRIVATE_KEY, { expiresIn: "1h" })
+        const token = jwt.sign({ _id: user._id }, process.env.JWT_PRIVATE_KEY, { expiresIn: "1h" })
         res.status(200).json({ message: "Login successful", token })
         
     } catch (error) {
@@ -78,7 +78,7 @@ export const updateUser = async (req, res, next) => {
             return req.status(422).json(error)
         }
         const { id } = req.params
-        const user = await UserModel.findByIdAndUpdate(req.auth.id,value, { new: true })
+        const user = await UserModel.findByIdAndUpdate(req.auth.id, value, { new: true })
         if (!user) {
             return res.status(404).json({ message: "User not found" })
         }

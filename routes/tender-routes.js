@@ -1,12 +1,13 @@
 import { Router } from "express";
 import { createTender, getAllTenders, getTenderById, updateTenderById, deleteTenderById } from "../controllers/tender-controller.js";
+import { documentUpload } from "../middleware/upload.js";
 import { hasPermission, isAuthenticated } from "../middleware/auth.js";
 
 // use router
 const tenderRouter = Router();
 
 // define routes
-tenderRouter.post("/tender/add", isAuthenticated ,createTender);
+tenderRouter.post("/tender/add", isAuthenticated, hasPermission('create_tender'),documentUpload.array('attachments'),createTender);
 
 tenderRouter.get("/tender", getAllTenders);
 

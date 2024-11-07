@@ -23,23 +23,29 @@ export const permissions = [
         ]
     },
     {
-        role:'project_owner',
+        role:'Project Owner',
         actions:[
             'create_project',
             'update_project',
             'delete_project',
-            'get_project'
+            'get_project',
+            'update_profile',
+            'delete_profile',
         ]
     },
     {
-        role:'project_regulator',
+        role:'Project Regulator',
         actions:[
             'create_project',
             'update_project',
             'delete_project',
             'get_project',
             'update_project_status',
-            'delete_tender'
+            'delete_tender',
+            'create_tender',
+            'update_tender',
+            'update_profile',
+            'delete_profile',
         ]
     }
 ]
