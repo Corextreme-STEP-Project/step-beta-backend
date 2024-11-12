@@ -44,10 +44,10 @@ const tenderSchema = new Schema({
         required: true,
         trim: true
     },
-    attachments: {
-        type: [String],
-        required: true
-    },
+    // attachments: {
+    //     type: [String],
+    //     required: true
+    // },
         // name: {
     //         type: String,
             // required: true,

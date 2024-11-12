@@ -1,4 +1,5 @@
 import Joi from "joi";
+import { ObjectId } from "mongodb";
 
 // Custom validation function for ObjectId
 const isValidObjectId = (value, helpers) => {
@@ -16,7 +17,7 @@ export const createTenderValidator = Joi.object({
     department: Joi.string().required(),
     status: Joi.string(),
     createdBy: Joi.custom(isValidObjectId).required(), 
-    attachments: Joi.string().required()
+    // attachments: Joi.string(),
     // attachments: Joi.array().items(
     //     Joi.object({
     //       name: Joi.string().required(),
@@ -39,16 +40,16 @@ export const updateTenderValidator = Joi.object({
     department: Joi.string(),
     status: Joi.string(),
     updatedBy: Joi.custom(isValidObjectId), 
-    attachments: Joi.array().items(
-        Joi.object({
-          name: Joi.string(),
-          url: Joi.string().uri(), 
-          mimeType: Joi.string().valid(
-            'application/pdf',
-            'application/msword',
-            'image/jpeg',
-            'image/png'
-          ),
-        })
-      ),
+    // attachments: Joi.array().items(
+    //     Joi.object({
+    //       name: Joi.string(),
+    //       url: Joi.string().uri(), 
+    //       mimeType: Joi.string().valid(
+    //         'application/pdf',
+    //         'application/msword',
+    //         'image/jpeg',
+    //         'image/png'
+    //       ),
+    //     })
+    //   ),
 });

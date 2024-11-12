@@ -21,8 +21,8 @@ const submissionSchema = new Schema({
         type: String,
         required: true
     },
-    document: {
-        type: String,
+    documents: {
+        type: [String],
         required: true
     },
     submissionDate: {
