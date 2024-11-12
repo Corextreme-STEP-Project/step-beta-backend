@@ -7,6 +7,8 @@ import reviewRouter from "./routes/reviews-routes.js";
 import awardRouter from "./routes/awards-routes.js";
 import tenderRouter from "./routes/tender-routes.js";
 import submissionsRouter from "./routes/submissions-routes.js";
+import milestoneRouter from "./routes/milestone.js";
+import performanceRouter from "./routes/performancIndicator.js";
 
 import http from 'http';
 import { Server } from "socket.io";
@@ -24,8 +26,7 @@ const port = process.env.PORT;
 
 // App Middleware
 app.use(express.json());
-app.use(cors());
-
+app.use(cors()); 
 
 // Define routes
 app.use(projectRouter);
@@ -34,6 +35,7 @@ app.use(reviewRouter);
 app.use(awardRouter);
 app.use(tenderRouter);
 app.use(submissionsRouter);
+
 app.use(notificationRouter);
 
 
@@ -41,6 +43,10 @@ app.use(notificationRouter);
 
 // Store connected  clients in memory
 export const connectedClients = new Map();
+
+app.use(milestoneRouter);
+app.use(performanceRouter);
+
 
 io.on('connection', (socket) => {
     console.log('Client connected:', socket.id);
