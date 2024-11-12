@@ -7,7 +7,7 @@ import { hasPermission, isAuthenticated } from "../middleware/auth.js";
 const tenderRouter = Router();
 
 // define routes
-tenderRouter.post("/tender/add", isAuthenticated, hasPermission('create_tender'),documentUpload.array('attachments'),createTender);
+tenderRouter.post("/tender/add", isAuthenticated, hasPermission('create_tender'),createTender);
 
 tenderRouter.get("/tender", getAllTenders);
 
