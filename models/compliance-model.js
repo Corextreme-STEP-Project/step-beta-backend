@@ -1,15 +1,15 @@
 import { Schema, model, Types } from "mongoose";
-import { toJSON } from "@reis/mongoose-to-json";
+import { toJSON } from "../step-project/node_modules/@reis/mongoose-to-json";
 
 export const complianceSchema = new Schema({
-projectId: {type: Types.ObjectId, required: true, ref: 'project'},
-complianceStatus: {type: Boolean, required: true},
-complianceReport: {type: String},
-correctiveActions: {type: String}
-}, {
-    timestamps: true
-});
+  project: { type: Types.ObjectId, ref: 'Project', required: true },
+  complianceStatus: { type: String, enum: ['compliant', 'non-compliant', 'pending'], default: 'pending' },
+  notes: { type: String },
+  checkedBy: { type: Types.ObjectId, ref: 'User' },
+}, { timestamps: true }
+);
 
-userSchema.plugin(toJSON);
+complianceSchema.plugin(toJSON);
 
-export const complianceModel = model('compliance', complianceSchema);
+export const complianceModel = model('Compliance', complianceSchema)
+
