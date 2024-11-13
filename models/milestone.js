@@ -1,4 +1,4 @@
-import { ref } from 'joi';
+
 import mongoose, { model, Types } from 'mongoose';
 
 const milestoneSchema = new mongoose.Schema({
@@ -10,7 +10,7 @@ const milestoneSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'PerformanceIndicator'
   }],
-  userID:{type:Types.ObjectId, ref:"user"}
+  userID:{type:Types.ObjectId, ref:'user'}
 });
 
 export const MilestoneModel = model('milestone', milestoneSchema)
