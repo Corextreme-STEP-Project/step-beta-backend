@@ -13,6 +13,7 @@ import performanceRouter from "./routes/performancIndicator.js";
 import http from 'http';
 import { Server } from "socket.io";
 import notificationRouter from "./routes/notification.js";
+import documentRouter from "./routes/document-route.js";
 import complianceRouter from "./routes/compliance-routes.js";
 
 
@@ -39,6 +40,7 @@ app.use(submissionsRouter);
 app.use(complianceRouter);
 
 app.use(notificationRouter);
+app.use(documentRouter)
 
 
 
