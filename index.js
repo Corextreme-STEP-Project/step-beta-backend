@@ -13,6 +13,7 @@ import performanceRouter from "./routes/performancIndicator.js";
 import http from 'http';
 import { Server } from "socket.io";
 import notificationRouter from "./routes/notification.js";
+import documentRouter from "./routes/document-route.js";
 
 
 await mongoose.connect(process.env.MONGO_URI);
@@ -37,6 +38,7 @@ app.use(tenderRouter);
 app.use(submissionsRouter);
 
 app.use(notificationRouter);
+app.use(documentRouter)
 
 
 
