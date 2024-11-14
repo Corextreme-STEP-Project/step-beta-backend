@@ -13,7 +13,7 @@ export const registerUser = async (req, res, next) => {
             return res.status(422).json(error)
         }
         // Check if user already exists
-        const existingUser = await UserModel.findOne({ email: value.email })
+        const existingUser = await UserModel.findOne({ email: value.email})
         if (existingUser) {
             return res.status(409).json({ message: "User already exists" })
         }
@@ -36,7 +36,7 @@ export const loginUser = async (req, res, next) => {
             return res.status(422).json(error)
         }
         // Check if user exists
-        const user = await UserModel.findOne({ email: value.email })
+        const user = await UserModel.findOne({ email: value.email, role: value.role })
         if (!user) {
             return res.status(401).json({ message: "Invalid email or password" })
         }

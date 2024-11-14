@@ -47,7 +47,10 @@ export const permissions = [
             'create_tender',
             'update_profile',
             'delete_profile',
-            'update_tender'
+            'update_tender',
+            'create_compliance',
+            'update_compliance',
+            'delete_compliance',
         ]
     }
 ]
