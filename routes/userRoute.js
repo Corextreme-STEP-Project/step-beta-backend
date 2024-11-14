@@ -9,9 +9,9 @@ userRouter.post('/users/register', registerUser);
 
 userRouter.post('/users/login', loginUser);
 
-userRouter.get('/users/me', isAuthenticated, hasPermission('get_user_profile'), getUserProfile);
+userRouter.get('/users/me', isAuthenticated, getUserProfile);
 
-userRouter.patch('/users/:id', isAuthenticated, hasPermission('update_user'), updateUser);
+userRouter.patch('/users/:id', isAuthenticated, updateUser);
 
 userRouter.delete('/users/:id', isAuthenticated, hasPermission('delete_user'), deletedUser);
 
