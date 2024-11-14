@@ -2,7 +2,8 @@
 import mongoose, { model, Types } from 'mongoose';
 
 const milestoneSchema = new mongoose.Schema({
-  name: { type: String, required: true },
+  milestoneName: { type: String, required: true },
+  projectName: {type: String, required: true},
   description: { type: String },
   targetDate: { type: Date },
   status: { type: String, enum: ['not started', 'in progress', 'completed'], default: 'not started' },
