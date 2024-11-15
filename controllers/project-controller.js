@@ -1,4 +1,5 @@
 import { projectModel } from "../models/project-model.js";
+import { UserModel } from "../models/user-models.js";
 import {
   scheduleProjectDeadlineNotification,
   scheduleStatusUpdateNotfication,
@@ -14,6 +15,7 @@ export const createProject = async (req, res, next) => {
     if (error) {
       return res.status(422).json(error);
     }
+
     // create project using validated input
     const newProject = await projectModel.create(value);
     // schedule notification for project deadline 3 days before projectEnds
