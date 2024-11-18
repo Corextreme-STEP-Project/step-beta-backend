@@ -1,6 +1,6 @@
 import { complianceModel } from "../models/compliance-model.js";
 import { projectModel } from "../models/project-model.js";
-import {  postComplianceValidator } from "../validators/compliance-validator.js";
+import {  postComplianceValidator, updateComplianceValidator } from "../validators/compliance-validator.js";
 
 
 // Create Compliance Record
