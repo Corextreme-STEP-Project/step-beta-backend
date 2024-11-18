@@ -19,7 +19,8 @@ export const projectSchema = new Schema({
     projectStatus: { type: String, default: 'Maturation', enum: ['Maturation', 'Procurement', 'Execution', 'Monitoring', 'Completed', 'On-hold', 'Cancelled'] },
     statusDescription: { type: String },
     statusChangeAt: { type: Date, default: Date.now },
-    compliance: { type: Types.ObjectId, ref: 'Compliance' }
+    compliance: { type: Types.ObjectId, ref: 'Compliance' },
+    projectOwner: {type: Types.ObjectId, ref: 'user'}
 }, {
     timestamps: true
 });

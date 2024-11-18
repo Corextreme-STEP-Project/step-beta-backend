@@ -5,14 +5,19 @@ import {
   getProjects,
   updateProjectStatus,
 } from "../controllers/project-controller.js";
-import { isAuthenticated } from "../middleware/auth.js";
+import { hasPermission, isAuthenticated } from "../middleware/auth.js";
 // create router
 
 const projectRouter = Router();
 
 // define routes
 
-projectRouter.post("/projects/add", isAuthenticated, createProject);
+projectRouter.post(
+  "/projects/add",
+  isAuthenticated,
+  hasPermission("create_project"),
+  createProject
+);
 
 projectRouter.get("/projects", getProjects);
 
