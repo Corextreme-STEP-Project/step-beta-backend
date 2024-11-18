@@ -1,4 +1,4 @@
-import mongoose, { Schema, Types, model } from "mongoose";
+import { Schema, Types, model } from "mongoose";
 import { toJSON } from "@reis/mongoose-to-json";
 
 const reviewSchema = new Schema({
