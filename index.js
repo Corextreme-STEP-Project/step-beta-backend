@@ -37,8 +37,7 @@ app.use(reviewRouter);
 app.use(awardRouter);
 app.use(tenderRouter);
 app.use(submissionsRouter);
-app.use(complianceRouter);
-
+app.use(complianceRouter)
 app.use(notificationRouter);
 app.use(documentRouter)
 
