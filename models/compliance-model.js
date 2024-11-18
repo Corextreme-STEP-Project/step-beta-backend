@@ -2,6 +2,7 @@ import { Schema, model, Types } from "mongoose";
 import { toJSON } from "@reis/mongoose-to-json";
 
 export const complianceSchema = new Schema({
+  
   project: { type: Types.ObjectId, ref: 'Project', required: true },
   complianceStatus: { type: String, enum: ['compliant', 'non-compliant', 'pending'], default: 'pending' },
   notes: [{ type: String }],

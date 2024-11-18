@@ -1,29 +1,43 @@
 import { complianceModel } from "../models/compliance-model.js";
 import { projectModel } from "../models/project-model.js";
+import {  postComplianceValidator } from "../validators/compliance-validator.js";
+
 
 // Create Compliance Record
-export const createCompliance = async (req, res, next) => {
+export const createComplianceRecord = async (req, res, next) => {
   try {
-    //For validation
-    const { error, value } = createComplianceValidator.validate(req.body);
+    const { error, value } = postComplianceValidator.validate(req.body);
     if (error) {
-      return res.status(422).json(error);
+      return res.status(422).json({ message: error.details[0].message });
     }
 
-    // checking if project exists
-    const project = await projectModel.findOne({ _id: value.projectId });
+    const projectId = req.params.projectId;
+    const checkedBy = req.auth.id; 
+
+    const project = await projectModel.findById(projectId);
     if (!project) {
-      return res.status(404).json("Project not found!");
+      return res.status(404).json({ message: "Project not found!" });
     }
 
-    // Creating compliance record with validator value
-    await complianceModel.create(value);
+    const { complianceStatus, notes } = value;
 
-    res.status(201).json("Compliance record created successfully");
+    // Append projectId and checkedBy fields to the compliance record
+    const complianceRecord = {
+      complianceStatus,
+      notes,
+      project: projectId,
+      checkedBy
+    };
+
+    // Create compliance record
+    await complianceModel.create(complianceRecord);
+
+    res.status(201).json({ message: "Compliance record created successfully" });
   } catch (error) {
     next(error);
   }
 };
+
 
 
  // Get all compliance records
@@ -31,7 +45,7 @@ export const getComplianceRecords = async (req, res, next) => {
   try {
     const { filter = "{}", sort = "{}" } = req.query
 
-    const complianceRecords = await complianceModel.find(JSON.parse(filter)).sort(JSON.parse(sort)).populate("project", "projectName projectStatus");
+    const complianceRecords = await complianceModel.find(JSON.parse(filter)).sort(JSON.parse(sort)).populate("project", "projectTitle projectStatus").populate("checkedBy", "firstName middleName lastName role");
 
     res.status(200).json(complianceRecords);
   } catch (error) {
@@ -44,7 +58,7 @@ export const getComplianceRecords = async (req, res, next) => {
 export const getComplianceRecord = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const complianceRecord = await complianceModel.findById(id).populate("projectId", "projectName projectStatus");
+    const complianceRecord = await complianceModel.findById(id).populate("project", "projectTitle projectStatus").populate("checkedBy", "firstName middleName lastName role");
 
     if (!complianceRecord) {
       return res.status(404).json("Compliance record not found!");

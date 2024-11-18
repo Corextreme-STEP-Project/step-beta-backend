@@ -18,12 +18,8 @@ try {
         return res.status(401).json({error: 'Authentication required'});
     }
     // find user from database
-    const user = await UserModel.findOne({_id: req.auth._id})
-    .populate('role')
-    .exec();
-    if (!user){
-        return res.status(404).json({error: 'User not found'});
-    }
+    const user = await UserModel.findById(req.auth.id)
+   
     // use the user role to find their permission
     const permission = permissions.find(value => value.role === user.role);
     if (!permission){

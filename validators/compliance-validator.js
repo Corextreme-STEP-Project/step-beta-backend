@@ -7,9 +7,4 @@ export const postComplianceValidator = Joi.object({
     notes: Joi.string(),
     checkedBy: Joi.string().custom(isValidObjectId)
   });
-  
-  
-  
-  
-  
-  
+ 

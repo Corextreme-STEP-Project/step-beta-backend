@@ -1,12 +1,13 @@
 import { Router } from "express";
-import { createCompliance, deleteComplianceRecord, getComplianceRecord, getComplianceRecords, updateComplianceStatus } from "../controllers/compliance-controller.js";
+import { createComplianceRecord, deleteComplianceRecord, getComplianceRecord, getComplianceRecords, updateComplianceStatus } from "../controllers/compliance-controller.js";
 import { hasPermission, isAuthenticated } from "../middleware/auth.js";
 
 // use router
 const complianceRouter = Router();
 
 // define routes
-complianceRouter.post("/compliance/add", isAuthenticated, hasPermission('create_compliance'),createCompliance);
+complianceRouter.post("/compliance/:projectId", isAuthenticated, hasPermission('get_project',  'create_compliance'), createComplianceRecord);
+
 
 complianceRouter.get("/compliance", isAuthenticated, getComplianceRecords);
 
