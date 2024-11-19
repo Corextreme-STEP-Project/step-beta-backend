@@ -15,7 +15,7 @@ export const documentMetadataSchema = new mongoose.Schema({
     createdDate: { type: Date, default: Date.now },
     lastModifiedDate: { type: Date, default: Date.now },
     relatedDocuments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'documentMetadata' }],
-
+    file: { type: String, required: true },
 
 }, {
     timestamps: true
