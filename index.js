@@ -15,6 +15,7 @@ import { Server } from "socket.io";
 import notificationRouter from "./routes/notification.js";
 import documentRouter from "./routes/document-route.js";
 import complianceRouter from "./routes/compliance-routes.js";
+import { scheduleNotifications } from "./services/compliance.js";
 
 
 await mongoose.connect(process.env.MONGO_URI);
@@ -74,6 +75,8 @@ export const sendNotification = (userId, notification) => {
         io.to(socketId).emit('notification', notification);
     }
 };
+
+scheduleNotifications()
 
 server.listen(port, () => {
     console.log(`Server is listening on ${port}`)
