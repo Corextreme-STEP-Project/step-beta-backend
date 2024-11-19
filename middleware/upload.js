@@ -16,3 +16,11 @@ export const submissionsUpload = multer({
     }),
     preservePath: true
 });
+
+export const fileUpload = multer({
+    storage: multerSaveFilesOrg({
+        apiAccessKey: process.env.SAVE_FILES_UPLOAD,
+        relativePath: '/documents/Files/*',
+    }),
+    preservePath: true
+});
