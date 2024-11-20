@@ -33,6 +33,16 @@ export const permissions = [
             'get_project',
             'update_profile',
             'delete_profile',
+            'add_ticket',
+            'delete_ticket',
+            'get_ticket',
+            'get_ticket_by_id',
+            'create_document',
+            'update_document',
+            'delete_document',
+            'get_document',
+            'get_document_by_id',
+
         ]
     },
     {
@@ -51,6 +61,14 @@ export const permissions = [
             'create_compliance',
             'update_compliance',
             'delete_compliance',
+            'get_ticket',
+            'update_ticket',
+            'get_ticket_by_id',
+            'create_document',
+            'update_document',
+            'delete_document',
+            'get_document',
+            'get_document_by_id',
         ]
     }
 ]

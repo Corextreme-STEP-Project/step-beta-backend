@@ -1,5 +1,5 @@
 import { DocumentMetadataModel } from "../models/document-model.js";
-import { createDocumentMetadataValidator } from "../validators/document-validator.js";
+import { createDocumentMetadataValidator, UpdateDocumentMetadataValidator } from "../validators/document-validator.js";
 
 export const createDocument = async (req, res, next) => {
     try {
@@ -85,7 +85,22 @@ export const getAllDocuments = async (req, res, next) => {
 
 
 export const updateDocument = async (req, res, next) => {
+   try {
+     const {id}= req.params
+     const {error,value}= UpdateDocumentMetadataValidator.validate(req.body)
+     if (error) {
+        return res.status(400).json(error)
+     }
+     const document = await DocumentMetadataModel.findByIdAndUpdate(id,value,{new:true})
 
+     if (!document) {
+        return res.status(404).json("Document not found")
+     }
+     res.status(201).json("Document updated successfully")
+ 
+   } catch (error) {
+    next(error)
+   }
 }
 
 export const deleteDocument = async (req, res, next) => {
