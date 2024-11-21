@@ -17,6 +17,7 @@ import notificationRouter from "./routes/notification.js";
 import documentRouter from "./routes/document-route.js";
 import complianceRouter from "./routes/compliance-routes.js";
 import { scheduleNotifications } from "./services/compliance.js";
+import ticketRoute from "./routes/ticketRoute.js";
 
 
 await mongoose.connect(process.env.MONGO_URI);
@@ -41,8 +42,10 @@ app.use(tenderRouter);
 app.use(submissionsRouter);
 app.use(complianceRouter)
 app.use(notificationRouter);
-app.use(documentRouter);
 app.use(faqRouter);
+app.use(documentRouter)
+app.use(ticketRoute)
+
 
 
 
