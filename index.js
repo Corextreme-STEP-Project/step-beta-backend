@@ -9,6 +9,7 @@ import tenderRouter from "./routes/tender-routes.js";
 import submissionsRouter from "./routes/submissions-routes.js";
 import milestoneRouter from "./routes/milestone.js";
 import performanceRouter from "./routes/performancIndicator.js";
+import faqRouter from "./routes/faq-routes.js";
 
 import http from 'http';
 import { Server } from "socket.io";
@@ -40,8 +41,8 @@ app.use(tenderRouter);
 app.use(submissionsRouter);
 app.use(complianceRouter)
 app.use(notificationRouter);
-app.use(documentRouter)
-
+app.use(documentRouter);
+app.use(faqRouter);
 
 
 

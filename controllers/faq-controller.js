@@ -4,6 +4,7 @@ import { FAQModel } from "../models/faq-model.js";
 export const createFAQ = async (req, res, next) => {
     try {
         const faq = await FAQModel.create(req.body);
+        await faq.save();
         res.status(201).json(faq);
     } catch (error) {
         next(error);
@@ -22,27 +23,34 @@ export const updateFAQ = async (req, res, next) => {
 }
 
 // Search FAQs
-export const searchFAQs = async (query) => {
-    const searchCriteria = {};
+export const searchFAQs = async (req, res, next) => {
+    try {
+        const { text, category, tags, limit = 10 } = req.query;
+        const searchCriteria = {};
 
-    if (query.text) {
-        searchCriteria.$text = { $search: query.text };
+       if (text) searchCriteria.$text = { $search: text };
+       if (category) searchCriteria.category = category;
+       if (tags) searchCriteria.tags = { $all: tags.split(',') };
+        const faqs = await FAQModel
+            .find(searchCriteria)
+            .sort({ helfulCount: -1 })
+            .limit(parseInt(limit));
+        res.status(200).json(faqs);
+    } catch (error) {
+        next(error);
     }
-
-    if (query.category) {
-        searchCriteria.category = query.category;
-    }
-if (query.tags) {
-    searchCriteria.tags = { $in: query.tags};
-}
-    return await FAQModel
-        .find(searchCriteria)
-        .sort({ helfulCount: -1 })
-        .limit(query.limit || 10);
 }
 
 // Record FAQ Feedback
-export const recordFAQFeedback = async(id, isHelpful) => {
-    const updateField = isHelpful ? 'helpfulCount' : 'notHelpfulCount';
-    return await FAQModel.findByIdAndUpdate(id, { [updateField]: { $inc: { [updateField]: 1 } } }, { new: true });
+export const recordFAQFeedback = async(req, res, next) => {
+    try {
+        const { id } = req.params;
+        const { isHelpful } = req.body;
+        
+        const updateField = isHelpful ? 'helpfulCount' : 'unhelpfulCount';
+        const faq = await FAQModel.findByIdAndUpdate(id, { $inc: { [updateField]: 1 } }, { new: true });
+        res.status(200).json(faq);
+    } catch (error) {
+        next(error);
+    }
 }
