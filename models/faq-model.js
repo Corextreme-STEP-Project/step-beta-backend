@@ -1,4 +1,4 @@
-import { Schema } from "mongoose";
+import { Schema, model } from "mongoose";
 import { toJSON } from "@reis/mongoose-to-json";
 
 export const faqSchema = new Schema({
@@ -25,18 +25,21 @@ export const faqSchema = new Schema({
         type: Number,
         default: 0
     },
-    relatedDocuments: [{ type: Schema.Types.ObjectId, ref: 'documentMetadata' }],
-    lastUpdated: {
-        type: Date,
-        default: Date.now
-    },
-    status: {
-        type: String,
-        enum: ['DRAFT', 'PUBLISHED', 'ARCHIVED'],
-        default: 'DRAFT'
-    }
+    // relatedDocuments: [{ type: Schema.Types.ObjectId, ref: 'documentMetadata' }],
+    // lastUpdated: {
+    //     type: Date,
+    //     default: Date.now
+    // },
+    // status: {
+    //     type: String,
+    //     enum: ['DRAFT', 'PUBLISHED', 'ARCHIVED'],
+    //     default: 'DRAFT'
+    // },
+
+}, {
+    timestamps: true
 });
-    
+
 
 faqSchema.plugin(toJSON);
 
